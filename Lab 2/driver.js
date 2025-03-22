@@ -2,25 +2,25 @@
 
 let blindSignatures = require('blind-signatures');
 
-// تعريف كلاس الوكالة التجسسية
+
 class SpyAgency {
     constructor() {
-        this.n = 1234567890123456789012345678901234567890n; // مثال لقيمة n
-        this.e = 65537n; // مثال لقيمة e
+        this.n = 1234567890123456789012345678901234567890n; 
+        this.e = 65537n; 
     }
 
     signDocument(blindDocs, callback) {
-        // محاكاة اختيار مستند عشوائي للتوقيع
+        
         let selected = Math.floor(Math.random() * blindDocs.length);
         
-        // تنفيذ التوقيع الوهمي
+        
         let signedDocs = blindDocs.map((doc, index) =>
             index === selected ? BigInt(doc) ** this.e % this.n : null
         );
 
-        // تنفيذ الدالة الاسترجاعية مع البيانات المحددة
+    
         callback(selected, (verifiedFactors, verifiedDocs) => {
-            return signedDocs[selected]; // إرجاع التوقيع فقط للمستند المحدد
+            return signedDocs[selected]; 
         });
     }
 }
